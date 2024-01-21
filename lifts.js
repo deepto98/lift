@@ -30,27 +30,41 @@ function createLifts() {
 
         var buttonContainer = document.createElement('div');
         buttonContainer.classList.add('button-container');
-        buttonContainer.id = "button-containe".concat(floor);
+        buttonContainer.id = "button-container".concat(floor);
+
+        var ulElement = document.createElement("ul");
+
+        var liElement = document.createElement("li");
+
 
         var upButton = document.createElement('button');
         upButton.classList.add('up-button');
         upButton.textContent = 'Up';
-        upButton.id = "Up".concat(floor);
+        upButton.id = "up-btn-".concat(floor);
 
-        var separator = document.createElement('div');
-        separator.classList.add('separator');
+        liElement.appendChild(upButton)
+        
+        ulElement.appendChild(liElement)
+
+        // var separator = document.createElement('div');
+        // separator.classList.add('separator');
+        liElement = document.createElement("li");
 
         var downButton = document.createElement('button');
         downButton.classList.add('down-button');
         downButton.textContent = 'Down';
-        downButton.id = "Down".concat(floor);
+        downButton.id = "down-btn-".concat(floor);
+        liElement.appendChild(downButton)
+
 
         var blackLine = document.createElement('div');
         blackLine.classList.add('black-line');
 
-        buttonContainer.appendChild(upButton);
-        // buttonContainer.appendChild(separator);
-        buttonContainer.appendChild(downButton);
+        ulElement.appendChild(liElement)
+        buttonContainer.appendChild(ulElement)
+        // buttonContainer.appendChild(upButton);
+        // // buttonContainer.appendChild(separator);
+        // buttonContainer.appendChild(downButton);
 
         var floorLabel = document.createElement('div');
         floorLabel.classList.add('floor-label');
