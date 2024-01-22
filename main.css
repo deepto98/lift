@@ -21,12 +21,17 @@ button {
 /* Lifts Page */
 .floor {
     display: flex;
-    align-items: center;
-    margin-bottom: 60px;
+    /* align-items: center; */
+    margin-bottom: 50px;
+
 }
 
 .floor-label {
     flex: 1;
+    display: flex;
+    align-items: flex-end;
+    margin-left: 55px;
+
 }
 
 .button-container {
@@ -50,26 +55,32 @@ button {
     cursor: pointer;
 }
 
-.separator {
+/* .separator {
     border-top: 1px solid #ccc;
     margin: 5px 0;
     width: 100%;
-}
+} */
 
 .black-line {
+    position: relative;
     border-bottom: 2px solid black;
     flex: 1;
-    margin-left: 5px;
+    margin-left: 55px;
     margin-right: 5px;
 }
 
 .lift {
-    width: 100px;
-    height: 50px;
+    width: 60px;
+    height: 100px;
     background-color: blue;
+    display: flex;
+    position: relative;
+    align-items: center;
+
 }
+
 .lift-container {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
 }

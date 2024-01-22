@@ -1,19 +1,10 @@
-function fetchLiftConfiguration() {
-    // Get values from user inputs
-    var numberOfFloors = document.getElementById('floors').value;
-    var numberOfLifts = document.getElementById('lifts').value;
 
-    console.log('Number of Floors:', numberOfFloors);
-    console.log('Number of Lifts:', numberOfLifts);
 
-    var url = 'lifts.html?numberOfFloors=' + encodeURIComponent(numberOfFloors) + '&numberOfLifts=' + encodeURIComponent(numberOfLifts);
-
-    window.location.href = url;
-}
 
 document.addEventListener("DOMContentLoaded", createLifts);
 
 function createLifts() {
+
     // Get values from url params
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -43,7 +34,7 @@ function createLifts() {
         upButton.id = "up-btn-".concat(floor);
 
         liElement.appendChild(upButton)
-        
+
         ulElement.appendChild(liElement)
 
         // var separator = document.createElement('div');
@@ -83,7 +74,7 @@ function createLifts() {
 
                 liftRectangle.classList.add('lift');
                 // Set the id of the new div element to "lift"
-                liftRectangle.id = "lift".concat(lift);
+                liftRectangle.id = "lift-".concat(lift);
 
                 // Append the new div element to the container
                 liftContainer.appendChild(liftRectangle);
@@ -98,6 +89,8 @@ function createLifts() {
         liftSystemContainer.appendChild(floorDiv)
     }
 
+    // Positions
+
 
     // Add event listeners
 
@@ -107,10 +100,7 @@ function createLifts() {
 
     for (const upButton of upButtons) {
         // Add an event listener for the "click" event
-        upButton.addEventListener("click", function () {
-            // Code to execute when the button is pressed
-            alert("Up Button Pressed!");
-        });
+        upButton.addEventListener("click", toggleAnimation);
     }
 
     for (const downButton of downButtons) {
@@ -120,4 +110,42 @@ function createLifts() {
             alert("Down Button Pressed!");
         });
     }
+}
+
+
+
+function moveDiv(animatedDiv, direction, speed) {
+    var currentPosition = parseInt(animatedDiv.style.top) || 0;
+    console.log(currentPosition)
+
+    console.log( window.innerHeight - animatedDiv.clientHeight)
+    // if (currentPosition >= window.innerHeight - animatedDiv.clientHeight && direction === 1) {
+    //     // Change direction when reaching the bottom
+    //     direction = -1;
+    // } else if (currentPosition <= 0 && direction === -1) {
+    //     // Change direction when reaching the top
+    //     direction = 1;
+    // }
+
+    // Move the div in the specified direction
+    animatedDiv.style.top = currentPosition + direction * speed + "px";
+}
+
+function toggleAnimation() {
+    // alert("Hello")
+    // Animations
+    var animatedDiv = document.getElementById("lift-2");
+    console.log(animatedDiv)
+    var direction = -1; // 1 for moving down, -1 for moving up
+    var speed = 188; // Adjust the speed of the animation
+    var isAnimating = false;
+    if (isAnimating) {
+        // Stop the animation
+        clearInterval(animationInterval);
+    } else {
+        // Start the animation
+        animationInterval = setInterval(moveDiv(animatedDiv, direction, speed), 16); // Adjust the interval for smoother animation (16ms = 60fps)
+    }
+
+    isAnimating = !isAnimating;
 }
