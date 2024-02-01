@@ -25,6 +25,7 @@ function createLifts() {
 
         var ulElement = document.createElement("ul");
 
+        if (floor != numFloors){
         var liElement = document.createElement("li");
 
 
@@ -36,17 +37,18 @@ function createLifts() {
         liElement.appendChild(upButton)
 
         ulElement.appendChild(liElement)
-
+        }
         // var separator = document.createElement('div');
         // separator.classList.add('separator');
-        liElement = document.createElement("li");
 
-        var downButton = document.createElement('button');
-        downButton.classList.add('down-button');
-        downButton.textContent = 'Down';
-        downButton.id = "down-btn-".concat(floor);
-        liElement.appendChild(downButton)
-
+        if (floor != 1) {
+            liElement = document.createElement("li");
+            var downButton = document.createElement('button');
+            downButton.classList.add('down-button');
+            downButton.textContent = 'Down';
+            downButton.id = "down-btn-".concat(floor);
+            liElement.appendChild(downButton)
+        }
 
         var blackLine = document.createElement('div');
         blackLine.classList.add('black-line');
@@ -95,6 +97,9 @@ function createLifts() {
     for (let i = 1; i <= numLifts; i++) {
         positions[i] = 1  //Initially all lifts are at floor 1
     }
+    // Set as positions key in sessionStorage
+    sessionStorage.setItem('positions', positions);
+
     // Get the button element by its id
     var upButtons = document.getElementsByClassName("up-button");
     var downButtons = document.getElementsByClassName("down-button");
@@ -119,10 +124,17 @@ function createLifts() {
 function toggleUpAnimation(event) {
     floorFromWhichCalled = event.currentTarget.floor
     // Animations
+    console.log("floorFromWhichCalled")
+    console.log(floorFromWhichCalled)
     // Calculate lift to move
-    
+    // Up can be called from 1st floor to numFloors-1 th floor 
+    // First we need to find the nearest lift
+    // Fetch positions
+    var positions = sessionStorage.getItem('positions');
+    console.log("Current positions")
+    console.log(positions)
     var animatedDiv = document.getElementById("lift-2");
-    console.log(animatedDiv)
+    // console.log(animatedDiv)
     var direction = -1; // 1 for moving down, -1 for moving up
     var distance = 130; // Adjust the speed of the animation
     var isAnimating = false;
@@ -158,9 +170,9 @@ function toggleDownAnimation(event) {
 
 function moveDiv(animatedDiv, direction, speed) {
     var currentPosition = parseInt(animatedDiv.style.top) || 0;
-    console.log(currentPosition)
+    // console.log(currentPosition)
 
-    console.log(window.innerHeight - animatedDiv.clientHeight)
+    // console.log(window.innerHeight - animatedDiv.clientHeight)
     // if (currentPosition >= window.innerHeight - animatedDiv.clientHeight && direction === 1) {
     //     // Change direction when reaching the bottom
     //     direction = -1;
