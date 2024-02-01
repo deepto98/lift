@@ -100,15 +100,12 @@ function createLifts() {
 
     for (const upButton of upButtons) {
         // Add an event listener for the "click" event
-        upButton.addEventListener("click", toggleAnimation);
+        upButton.addEventListener("click", toggleUpAnimation);
     }
 
     for (const downButton of downButtons) {
         // Add an event listener for the "click" event
-        downButton.addEventListener("click", function () {
-            // Code to execute when the button is pressed
-            alert("Down Button Pressed!");
-        });
+        downButton.addEventListener("click",toggleDownAnimation);
     }
 }
 
@@ -131,20 +128,39 @@ function moveDiv(animatedDiv, direction, speed) {
     animatedDiv.style.top = currentPosition + direction * speed + "px";
 }
 
-function toggleAnimation() {
+function toggleUpAnimation() {
     // alert("Hello")
     // Animations
     var animatedDiv = document.getElementById("lift-2");
     console.log(animatedDiv)
     var direction = -1; // 1 for moving down, -1 for moving up
-    var speed = 188; // Adjust the speed of the animation
+    var distance = 130; // Adjust the speed of the animation
     var isAnimating = false;
     if (isAnimating) {
         // Stop the animation
         clearInterval(animationInterval);
     } else {
         // Start the animation
-        animationInterval = setInterval(moveDiv(animatedDiv, direction, speed), 16); // Adjust the interval for smoother animation (16ms = 60fps)
+        animationInterval = setInterval(moveDiv(animatedDiv, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
+    }
+
+    isAnimating = !isAnimating;
+}
+
+function toggleDownAnimation() {
+    // alert("Hello")
+    // Animations
+    var animatedDiv = document.getElementById("lift-2");
+    console.log(animatedDiv)
+    var direction =  1; // 1 for moving down, -1 for moving up
+    var distance = 130; // Adjust the speed of the animation
+    var isAnimating = false;
+    if (isAnimating) {
+        // Stop the animation
+        clearInterval(animationInterval);
+    } else {
+        // Start the animation
+        animationInterval = setInterval(moveDiv(animatedDiv, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
     }
 
     isAnimating = !isAnimating;
