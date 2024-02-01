@@ -89,48 +89,38 @@ function createLifts() {
         liftSystemContainer.appendChild(floorDiv)
     }
 
-    // Positions
-
-
-    // Add event listeners
-
+    // Manage positions here
+    let positions = []; // this array stores positions of each lift
+    // Fill values with 1 indexing, position[liftNo]=floor
+    for (let i = 1; i <= numLifts; i++) {
+        positions[i] = 1  //Initially all lifts are at floor 1
+    }
     // Get the button element by its id
     var upButtons = document.getElementsByClassName("up-button");
     var downButtons = document.getElementsByClassName("down-button");
 
+    // Add event listeners
+
     for (const upButton of upButtons) {
         // Add an event listener for the "click" event
+        let floor = upButton.id.slice(7) // ids are in the format up-btn-2
         upButton.addEventListener("click", toggleUpAnimation);
+        upButton.floor = floor
     }
 
     for (const downButton of downButtons) {
         // Add an event listener for the "click" event
-        downButton.addEventListener("click",toggleDownAnimation);
+        let floor = upButton.id.slice(7) // ids are in the format up-btn-2
+        downButton.addEventListener("click", toggleDownAnimation);
+        downButton.floor = floor
     }
 }
 
-
-
-function moveDiv(animatedDiv, direction, speed) {
-    var currentPosition = parseInt(animatedDiv.style.top) || 0;
-    console.log(currentPosition)
-
-    console.log( window.innerHeight - animatedDiv.clientHeight)
-    // if (currentPosition >= window.innerHeight - animatedDiv.clientHeight && direction === 1) {
-    //     // Change direction when reaching the bottom
-    //     direction = -1;
-    // } else if (currentPosition <= 0 && direction === -1) {
-    //     // Change direction when reaching the top
-    //     direction = 1;
-    // }
-
-    // Move the div in the specified direction
-    animatedDiv.style.top = currentPosition + direction * speed + "px";
-}
-
-function toggleUpAnimation() {
-    // alert("Hello")
+function toggleUpAnimation(event) {
+    floorFromWhichCalled = event.currentTarget.floor
     // Animations
+    // Calculate lift to move
+    
     var animatedDiv = document.getElementById("lift-2");
     console.log(animatedDiv)
     var direction = -1; // 1 for moving down, -1 for moving up
@@ -147,12 +137,12 @@ function toggleUpAnimation() {
     isAnimating = !isAnimating;
 }
 
-function toggleDownAnimation() {
-    // alert("Hello")
+function toggleDownAnimation(event) {
+    floorFromWhichCalled = event.currentTarget.floor
     // Animations
     var animatedDiv = document.getElementById("lift-2");
     console.log(animatedDiv)
-    var direction =  1; // 1 for moving down, -1 for moving up
+    var direction = 1; // 1 for moving down, -1 for moving up
     var distance = 130; // Adjust the speed of the animation
     var isAnimating = false;
     if (isAnimating) {
@@ -164,4 +154,21 @@ function toggleDownAnimation() {
     }
 
     isAnimating = !isAnimating;
+}
+
+function moveDiv(animatedDiv, direction, speed) {
+    var currentPosition = parseInt(animatedDiv.style.top) || 0;
+    console.log(currentPosition)
+
+    console.log(window.innerHeight - animatedDiv.clientHeight)
+    // if (currentPosition >= window.innerHeight - animatedDiv.clientHeight && direction === 1) {
+    //     // Change direction when reaching the bottom
+    //     direction = -1;
+    // } else if (currentPosition <= 0 && direction === -1) {
+    //     // Change direction when reaching the top
+    //     direction = 1;
+    // }
+
+    // Move the div in the specified direction
+    animatedDiv.style.top = currentPosition + direction * speed + "px";
 }
