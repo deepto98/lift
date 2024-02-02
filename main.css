@@ -19,7 +19,9 @@ button {
 }
 
 /* Lifts Page */
-
+ul{
+    list-style-type: none;
+}
 
 .button-container {
     display: flex;
@@ -33,12 +35,19 @@ button {
 }
 
 .up-button {
+    margin-bottom: 20px;
+    width: 70px;
     background-color: green;
     color: white;
     cursor: pointer;
+    border-radius: 12px;
+
 }
 
 .down-button {
+    width: 70px;
+    border-radius: 12px;
+
     background-color: yellow;
     cursor: pointer;
 }
@@ -85,8 +94,13 @@ button {
     position: relative;
     align-items: end;
     margin-top: 10px;
-}
+    transition:all 2s  !important;
 
+}
+/* #lift-1{
+    transition:all 3s linear;
+
+}  */
 .lift-container {
     display: flex;
     gap: 20px;

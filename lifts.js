@@ -141,7 +141,7 @@ function getNearestLift(currentFloor) {
     return nearestLift
 }
 
-function parsePositionsFromSessionStorage(){
+function parsePositionsFromSessionStorage() {
     var positions = sessionStorage.getItem('positions');
     var positionsArr = positions.split(',');
     return positionsArr
@@ -184,30 +184,34 @@ function upPressed(event) {
         var direction = 1; // 1 for moving down, -1 for moving up
         var distance = 130 * (floorOfNearestLift - floorFromWhichCalled); // Adjust the speed of the animation
         var isAnimating = false;
-        if (isAnimating) {
-            // Stop the animation
-            clearInterval(animationInterval);
-        } else {
-            // Start the animation
-            animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
-        }
+        // if (isAnimating) {
+        //     // Stop the animation
+        //     clearInterval(animationInterval);
+        // } else {
+        // Start the animation
+        // animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
+        moveDiv(liftToMove, direction, distance);
 
-        isAnimating = !isAnimating;
+        // }
+
+        // isAnimating = !isAnimating;
     }
     //lift is below, has to move up
     else if (floorOfNearestLift < floorFromWhichCalled) {
         var direction = -1; // 1 for moving down, -1 for moving up
         var distance = 130 * (floorFromWhichCalled - floorOfNearestLift); // Adjust the speed of the animation
-        var isAnimating = false;
-        if (isAnimating) {
-            // Stop the animation
-            clearInterval(animationInterval);
-        } else {
-            // Start the animation
-            animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
-        }
+        // var isAnimating = false;
+        // if (isAnimating) {
+        //     // Stop the animation
+        //     clearInterval(animationInterval);
+        // } else {
+        // Start the animation
+        // animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
+        moveDiv(liftToMove, direction, distance);
 
-        isAnimating = !isAnimating;
+        // }
+
+        // isAnimating = !isAnimating;
     }
     positions[nearestLift] = floorFromWhichCalled
 
@@ -254,31 +258,34 @@ function downPressed(event) {
     else if (floorOfNearestLift > floorFromWhichCalled) {
         var direction = 1; // 1 for moving down, -1 for moving up
         var distance = 130 * (floorOfNearestLift - floorFromWhichCalled); // Adjust the speed of the animation
-        var isAnimating = false;
-        if (isAnimating) {
-            // Stop the animation
-            clearInterval(animationInterval);
-        } else {
+        // var isAnimating = fsalse;
+        // if (isAnimating) {
+        //     // Stop the animation
+        //     clearInterval(animationInterval);
+        // } else {
             // Start the animation
-            animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
-        }
+            // animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 20000); // Adjust the interval for smoother animation (16ms = 60fps)
+            moveDiv(liftToMove, direction, distance);
 
-        isAnimating = !isAnimating;
+        // }
+
+        // isAnimating = !isAnimating;
     }
     //lift is below, has to move up
     else if (floorOfNearestLift < floorFromWhichCalled) {
         var direction = -1; // 1 for moving down, -1 for moving up
         var distance = 130 * (floorFromWhichCalled - floorOfNearestLift); // Adjust the speed of the animation
         var isAnimating = false;
-        if (isAnimating) {
-            // Stop the animation
-            clearInterval(animationInterval);
-        } else {
+        // if (isAnimating) {
+        //     // Stop the animation
+        //     clearInterval(animationInterval);
+        // } else {
             // Start the animation
-            animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
-        }
+            // animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 20000); // Adjust the interval for smoother animation (16ms = 60fps)
+            moveDiv(liftToMove, direction, distance);
+        // }
 
-        isAnimating = !isAnimating;
+        // isAnimating = !isAnimating;
     }
     positions[nearestLift] = floorFromWhichCalled
 
@@ -303,5 +310,7 @@ function moveDiv(animatedDiv, direction, speed) {
     // }
 
     // Move the div in the specified direction
+    // animatedDiv.style.transition = '2s linear';
+
     animatedDiv.style.top = currentPosition + direction * speed + "px";
 }
