@@ -106,13 +106,23 @@ ul {
 }
 
 .left-door {
-    height: 113px;
+    position: relative;
+    height: 112px;
     margin-left: 45%;
     border: solid black;
+    left: 0px;
+    right: 0px;
+    transition : 2.5s all;
 }
 
 .right-door {
-    height:113px ;
+    position: relative;
+
+    height:112px ;
     margin-right: 45%;
     border:  solid black;
+    left: 0px;
+    right: 0px;
+    transition : 2.5s all;
+
   }
