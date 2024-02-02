@@ -118,7 +118,7 @@ function createLifts() {
 
     for (const downButton of downButtons) {
         // Add an event listener for the "click" event
-        let floor = upButton.id.slice(7) // ids are in the format up-btn-2
+        let floor = downButton.id.slice(9) // ids are in the format down-btn-2
         downButton.addEventListener("click", downPressed);
         downButton.floor = floor
     }
@@ -150,6 +150,75 @@ function parsePositionsFromSessionStorage(){
 function upPressed(event) {
     // Animations
 
+    // Calculate lift to move
+    // Up can be called from 1st floor to numFloors-1 th floor 
+    // First we need to find the nearest lift
+    // If a lift is present at that floor, do nothing
+    floorFromWhichCalled = event.currentTarget.floor
+    console.log("floorFromWhichCalled")
+    console.log(floorFromWhichCalled)
+
+    // Get nearest lift
+    let nearestLift = getNearestLift(floorFromWhichCalled)
+    console.log("nearestLift")
+    console.log(nearestLift)
+    // window.alert(nearestLift)
+
+    // Fetch positions
+    var positions = parsePositionsFromSessionStorage();
+    console.log("Current positions")
+    console.log(positions)
+    let floorOfNearestLift = positions[nearestLift];
+    console.log("floorOfNearestLift")
+    console.log(floorOfNearestLift)
+
+    var liftToMove = document.getElementById("lift-".concat(nearestLift));
+    console.log("liftToMove")
+    console.log(liftToMove)
+    //    if lift is on same floor, do nothing
+    if (floorOfNearestLift == floorFromWhichCalled) {
+
+    }
+    //lift is above, has to move down
+    else if (floorOfNearestLift > floorFromWhichCalled) {
+        var direction = 1; // 1 for moving down, -1 for moving up
+        var distance = 130 * (floorOfNearestLift - floorFromWhichCalled); // Adjust the speed of the animation
+        var isAnimating = false;
+        if (isAnimating) {
+            // Stop the animation
+            clearInterval(animationInterval);
+        } else {
+            // Start the animation
+            animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
+        }
+
+        isAnimating = !isAnimating;
+    }
+    //lift is below, has to move up
+    else if (floorOfNearestLift < floorFromWhichCalled) {
+        var direction = -1; // 1 for moving down, -1 for moving up
+        var distance = 130 * (floorFromWhichCalled - floorOfNearestLift); // Adjust the speed of the animation
+        var isAnimating = false;
+        if (isAnimating) {
+            // Stop the animation
+            clearInterval(animationInterval);
+        } else {
+            // Start the animation
+            animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
+        }
+
+        isAnimating = !isAnimating;
+    }
+    positions[nearestLift] = floorFromWhichCalled
+
+    // let positionscp =positions 
+    // positionscp[1]=2
+    sessionStorage.setItem('positions', positions);
+    // console.log("New Current positions")
+    // console.log(positionscp)
+}
+
+function downPressed(event) {
     // Calculate lift to move
     // Up can be called from 1st floor to numFloors-1 th floor 
     // First we need to find the nearest lift
@@ -218,25 +287,6 @@ function upPressed(event) {
     sessionStorage.setItem('positions', positions);
     // console.log("New Current positions")
     // console.log(positionscp)
-}
-
-function downPressed(event) {
-    floorFromWhichCalled = event.currentTarget.floor
-    // Animations
-    var animatedDiv = document.getElementById("lift-2");
-    console.log(animatedDiv)
-    var direction = 1; // 1 for moving down, -1 for moving up
-    var distance = 130; // Adjust the speed of the animation
-    var isAnimating = false;
-    if (isAnimating) {
-        // Stop the animation
-        clearInterval(animationInterval);
-    } else {
-        // Start the animation
-        animationInterval = setInterval(moveDiv(animatedDiv, direction, distance), 16); // Adjust the interval for smoother animation (16ms = 60fps)
-    }
-
-    isAnimating = !isAnimating;
 }
 
 function moveDiv(animatedDiv, direction, speed) {
