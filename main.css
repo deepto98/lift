@@ -87,6 +87,7 @@ ul{
 }
 
 .lift {
+    top: 0px;
     width: 100px;
     height: 120px;
     background-color: blue;
@@ -94,8 +95,7 @@ ul{
     position: relative;
     align-items: end;
     margin-top: 10px;
-    transition:all 2s  !important;
-
+    z-index: 1;
 }
 /* #lift-1{
     transition:all 3s linear;

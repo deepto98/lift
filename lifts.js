@@ -183,7 +183,7 @@ function upPressed(event) {
     else if (floorOfNearestLift > floorFromWhichCalled) {
         var direction = 1; // 1 for moving down, -1 for moving up
         var distance = 130 * (floorOfNearestLift - floorFromWhichCalled); // Adjust the speed of the animation
-        var isAnimating = false;
+        // var isAnimating = false;
         // if (isAnimating) {
         //     // Stop the animation
         //     clearInterval(animationInterval);
@@ -309,8 +309,9 @@ function moveDiv(animatedDiv, direction, speed) {
     //     direction = 1;
     // }
 
+    // Transition - 2s/floor
+    animatedDiv.style.transition = '2s linear';
     // Move the div in the specified direction
-    // animatedDiv.style.transition = '2s linear';
 
     animatedDiv.style.top = currentPosition + direction * speed + "px";
 }
