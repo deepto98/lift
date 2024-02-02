@@ -19,7 +19,7 @@ button {
 }
 
 /* Lifts Page */
-ul{
+ul {
     list-style-type: none;
 }
 
@@ -88,6 +88,7 @@ ul{
 
 .lift {
     top: 0px;
+    bottom: 0px;
     width: 100px;
     height: 120px;
     background-color: blue;
@@ -97,12 +98,21 @@ ul{
     margin-top: 10px;
     z-index: 1;
 }
-/* #lift-1{
-    transition:all 3s linear;
 
-}  */
 .lift-container {
     display: flex;
     gap: 20px;
     align-items: center;
 }
+
+.left-door {
+    height: 113px;
+    margin-left: 45%;
+    border: solid black;
+}
+
+.right-door {
+    height:113px ;
+    margin-right: 45%;
+    border:  solid black;
+  }

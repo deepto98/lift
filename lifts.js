@@ -78,6 +78,17 @@ function createLifts() {
                 // Set the id of the new div element to "lift"
                 liftRectangle.id = "lift-".concat(lift);
 
+                //Add two lift doors- left and right 
+                var leftDoor = document.createElement("div");
+                leftDoor.classList.add('left-door');
+                leftDoor.id = "left-door-".concat(lift);
+
+                var rightDoor = document.createElement("div");
+                rightDoor.classList.add('right-door');
+                rightDoor.id = "right-door-".concat(lift);
+                liftRectangle.append(leftDoor)
+                liftRectangle.append(rightDoor)
+
                 // Append the new div element to the container
                 liftContainer.appendChild(liftRectangle);
             }
@@ -308,6 +319,9 @@ function moveDiv(animatedDiv, direction, distance) {
     //     // Change direction when reaching the top
     //     direction = 1;
     // }
+
+    // First Open Doors
+
 
     // Transition - 2s/floor
     floorsToMove = distance / 130;
