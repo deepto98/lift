@@ -210,15 +210,13 @@ async function moveDiv(liftNo, direction, distance) {
 
     var currentPosition = parseInt(liftToMove.style.top) || 0;
 
-
-
-
-    //, move lift  Transition - 2s/floor
+    //move lift  Transition - 2s/floor
     floorsToMove = distance / 130;
     liftToMove.style.transition = 2 * floorsToMove + 's linear';
     // Move the div in the specified direction
 
     liftToMove.style.top = currentPosition + direction * distance + "px";
+    // Pause execution till lift has moved
     await new Promise(r => setTimeout(r, 2000 * floorsToMove));
 
     // Now Open Doors
@@ -229,15 +227,19 @@ async function moveDiv(liftNo, direction, distance) {
     var leftDoorFinalLeft = liftLeft - leftDoorLeft
     console.log(leftDoorLeft + " " + liftLeft + " " + leftDoorFinalLeft)
     leftDoor.style.left = -45 + "px";
+    // Change colour to white
+    liftToMove.style.backgroundColor = 'white';
 
     var rightDoor = document.getElementById("right-door-".concat(liftNo));
     var rightDoorRight = parseInt(rightDoor.style.right);
 
     rightDoor.style.left = 43 + "px";
+    // Pause execution till doors have opened 
     await new Promise(r => setTimeout(r, 2500));
 
     //Close Doors
     leftDoor.style.left = 0 + "px";
     rightDoor.style.left = 0 + "px";
-
+    // Change colour to blue
+    liftToMove.style.backgroundColor = 'blue';
 }

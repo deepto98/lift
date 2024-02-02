@@ -1,3 +1,4 @@
+/* Index Page */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -19,6 +20,9 @@ button {
 }
 
 /* Lifts Page */
+ #liftSystemContainer{
+    width: 100%;
+}
 ul {
     list-style-type: none;
 }
@@ -65,7 +69,7 @@ ul {
     margin-left: 55px;
     margin-right: 5px;
     height: 130px;
-    width: 100px;
+    /* width: 100px; */
 }
 
 .floor {
@@ -79,11 +83,12 @@ ul {
 }
 
 .floor-label {
-    flex: 1;
+    /* flex: 1;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end; */
     margin-left: 55px;
-
+    margin-top: 100px;
+    height: 120px;
 }
 
 .lift {
@@ -96,13 +101,16 @@ ul {
     position: relative;
     align-items: end;
     margin-top: 10px;
-    z-index: 1;
+    /* background-image: linear-gradient(.0.25turn, red, 10%, blue); */
+    /* background-image: -webkit-linear-gradient(top, red, red 70%, transparent 70%, transparent 100%); */
+
 }
 
 .lift-container {
     display: flex;
     gap: 20px;
     align-items: center;
+    width: max-content;
 }
 
 .left-door {
