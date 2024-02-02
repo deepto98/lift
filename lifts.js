@@ -263,9 +263,9 @@ function downPressed(event) {
         //     // Stop the animation
         //     clearInterval(animationInterval);
         // } else {
-            // Start the animation
-            // animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 20000); // Adjust the interval for smoother animation (16ms = 60fps)
-            moveDiv(liftToMove, direction, distance);
+        // Start the animation
+        // animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 20000); // Adjust the interval for smoother animation (16ms = 60fps)
+        moveDiv(liftToMove, direction, distance);
 
         // }
 
@@ -280,9 +280,9 @@ function downPressed(event) {
         //     // Stop the animation
         //     clearInterval(animationInterval);
         // } else {
-            // Start the animation
-            // animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 20000); // Adjust the interval for smoother animation (16ms = 60fps)
-            moveDiv(liftToMove, direction, distance);
+        // Start the animation
+        // animationInterval = setInterval(moveDiv(liftToMove, direction, distance), 20000); // Adjust the interval for smoother animation (16ms = 60fps)
+        moveDiv(liftToMove, direction, distance);
         // }
 
         // isAnimating = !isAnimating;
@@ -296,7 +296,7 @@ function downPressed(event) {
     // console.log(positionscp)
 }
 
-function moveDiv(animatedDiv, direction, speed) {
+function moveDiv(animatedDiv, direction, distance) {
     var currentPosition = parseInt(animatedDiv.style.top) || 0;
     // console.log(currentPosition)
 
@@ -310,8 +310,9 @@ function moveDiv(animatedDiv, direction, speed) {
     // }
 
     // Transition - 2s/floor
-    animatedDiv.style.transition = '2s linear';
+    floorsToMove = distance / 130;
+    animatedDiv.style.transition = 2 * floorsToMove + 's linear';
     // Move the div in the specified direction
 
-    animatedDiv.style.top = currentPosition + direction * speed + "px";
+    animatedDiv.style.top = currentPosition + direction * distance + "px";
 }
